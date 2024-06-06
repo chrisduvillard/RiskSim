@@ -47,7 +47,6 @@ risk-management-simulator/
 ├── src/
 │   ├── app.py
 │   ├── style.py
-│   ├── README.md
 │   ├── risk_simulation.py
 │
 ├── config/
@@ -57,6 +56,7 @@ risk-management-simulator/
 ├── venv/
 │
 ├── requirements.txt
+├── README.md
 |── image.png
 |── image_1.png
 └── image_2.png
