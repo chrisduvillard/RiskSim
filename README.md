@@ -57,6 +57,7 @@ risk-management-simulator/
 │
 ├── requirements.txt
 ├── README.md
+├── LICENSE.txt
 |── image.png
 |── image_1.png
 └── image_2.png
@@ -93,7 +94,7 @@ Contributions are welcome! Please fork the repository and submit pull requests f
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 ## Author
 
