@@ -95,13 +95,13 @@ def layout(*args):
         var r = rgb[0]*0.299;
         var g = rgb[1]*0.587;
         var b = rgb[2]*0.114;
-        
+
         if ((r + g + b)/255 > 0.5){
             return "rgb(49, 51, 63)"
         }else{
             return "rgb(250, 250, 250)"
         }
-        
+
     };
     var stApp_css = window.parent.document.querySelector("#root > div:nth-child(1) > div > div > div");
     window.onload = function () {
@@ -113,7 +113,7 @@ def layout(*args):
                     pTag.style.color = fontColor.
                 });
             });
-            
+
             /**Element**/
             mutationObserver.observe(stApp_css, {
                 attributes: true,
@@ -137,6 +137,7 @@ def footer():
     myargs = [
         "Made with ❤️ by ",
         link("https://github.com/chrisduvillard", "Chris"),
+        # " - Stay alive long enough to get lucky - Jason Shapiro",
     ]
     layout(*myargs)
 
