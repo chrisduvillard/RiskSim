@@ -1,4 +1,3 @@
-from config.slider_configs import SLIDER_CONFIGS
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as plotly_express
@@ -10,7 +9,7 @@ import os
 # Add the root directory to the PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Now import the module
-
+from config.slider_configs import SLIDER_CONFIGS
 
 # Settings for Streamlit page appearance
 st.set_page_config(layout="wide")
@@ -218,7 +217,17 @@ def app():
     """
     The main function to run the Streamlit application for the risk management simulator.
     """
-    st.title("🎲 Risk Management Simulator")
+    st.markdown("""
+        <h2 style="color: #133337;">🎲 Risk-Reward Scenarios</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div style="text-align: center; padding: 20px;">
+            <h4 style="color: #133337;">Stay Alive Long Enough to Get Lucky</h4>
+            <p style="font-style: italic; color: #5D6D7E;">Jason Shapiro</p>
+        </div>
+    """, unsafe_allow_html=True)
+
     st.sidebar.header("Simulation Parameters️ ⚙️")
     st.sidebar.markdown(
         "<small><em>Adjust the parameters to simulate different risk management scenarios.</em></small>",
