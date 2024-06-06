@@ -76,13 +76,16 @@ risk-management-simulator/
 - Risk per Trade: 1%
 - Return Per Unit Risk: 3x
 
+### Visualization
+
+Display the expected annualized return for different return per unit risk values.
+
 ![App Image](./image_1.png)
+
+Display the expected annualized return for different win rates.
 
 ![App Image](./image_2.png)
 
-### Visualization
-
-Interactive charts display the average returns and win rates, helping users understand the impact of different trading strategies.
 
 ## Contributing
 
