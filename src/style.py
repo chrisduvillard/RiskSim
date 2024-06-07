@@ -137,7 +137,6 @@ def footer():
     myargs = [
         "Made with ❤️ by ",
         link("https://github.com/chrisduvillard", "Chris"),
-        # " - Stay alive long enough to get lucky - Jason Shapiro",
     ]
     layout(*myargs)
 
@@ -165,7 +164,7 @@ def metric_box(title, value):
         <p style="
             font-size: 18px;
             font-weight: bold;
-            color: #123524;
+            color: #355C7D;
             margin: 0;
         ">{value}</p>
     </div>

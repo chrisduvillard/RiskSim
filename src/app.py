@@ -113,7 +113,7 @@ def create_bar_chart_figure(results, medians, return_per_unit_risk_value):
     return fig
 
 
-def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulations=10000, win_rate_value=None):
+def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulations=10_000, win_rate_value=None):
     """
     Create a bar chart figure representing the average percentage return 
     versus win rate for a given return per unit risk (RPUR).
@@ -213,17 +213,47 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
     return fig
 
 
+def simulate_trades(win_rate, num_trades_per_year, risk_per_trade, simulations=1000):
+    win_rate = win_rate / 100
+
+    def max_drawdown(trades):
+        max_dd = 0
+        current_dd = 0
+        for trade in trades:
+            if trade == 0:  # Losing trade
+                current_dd += 1
+                max_dd = max(max_dd, current_dd)
+            else:  # Winning trade
+                current_dd = 0
+        return max_dd * risk_per_trade
+
+    drawdowns = []
+
+    for _ in range(simulations):
+        # Generate trades: 1 for win, 0 for loss
+        trades = np.random.choice([1, 0], size=num_trades_per_year, p=[win_rate, 1 - win_rate])
+        # Shuffle the trades
+        np.random.shuffle(trades)
+        # Calculate maximum drawdown for this scenario
+        drawdowns.append(max_drawdown(trades))
+
+    # Calculate average drawdown
+    average_drawdown = np.mean(drawdowns)
+
+    return average_drawdown
+
+
 def app():
     """
     The main function to run the Streamlit application for the risk management simulator.
     """
     st.markdown("""
-        <h2 style="color: #133337;">🎲 Risk-Reward Scenarios</h2>
+        <h1 style="color: #4a6378;">🎲 Risk-Reward Scenarios</h1>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-        <div style="text-align: center; padding: 20px;">
-            <h4 style="color: #133337;">Stay Alive Long Enough to Get Lucky</h4>
+        <div style="text-align: center; padding: 22px;">
+            <h4 style="color: #5D6D7E;">Stay Alive Long Enough to Get Lucky</h4>
             <p style="font-style: italic; color: #5D6D7E;">Jason Shapiro</p>
         </div>
     """, unsafe_allow_html=True)
@@ -249,7 +279,7 @@ def app():
 
     # Calculate the maximum drawdown
     max_drawdown = nb_trades_per_year * (1 - win_rate / 100) * risk_per_trade
-    avg_expected_drawdown = max_drawdown / 2
+    average_drawdown = simulate_trades(win_rate, nb_trades_per_year, risk_per_trade, simulations=10_000)
 
     # Display the simulation parameters as metrics
     col1, col2, col3, col4, col5, col6 = st.columns(6)
@@ -263,7 +293,7 @@ def app():
     with col4:
         st.markdown(metric_box("Avg Return/Risk", f"{return_per_unit_risk_value}x"), unsafe_allow_html=True)
     with col5:
-        st.markdown(metric_box("Avg Drawdown", f"{round(avg_expected_drawdown,1)}%"), unsafe_allow_html=True)
+        st.markdown(metric_box("Expected Drawdown", f"{round(average_drawdown,1)}%"), unsafe_allow_html=True)
     with col6:
         st.markdown(metric_box("Max Drawdown", f"{round(max_drawdown,1)}%"), unsafe_allow_html=True)
 
