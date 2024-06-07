@@ -274,7 +274,7 @@ def app():
         unsafe_allow_html=True
     )
     st.sidebar.markdown(
-        "<small><em>The maximum drawdown is the largest loss you could experience if all your losing trades occurred consecutively.</em></small>",
+        "<small><em>The max drawdown is the largest loss you could experience if all your losing trades occurred consecutively.</em></small>",
         unsafe_allow_html=True
     )
 
