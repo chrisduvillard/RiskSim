@@ -248,7 +248,7 @@ def app():
     The main function to run the Streamlit application for the risk management simulator.
     """
     st.markdown("""
-        <h1 style="color: #4a6378;">🎲 Risk-Reward Scenarios</h1>
+        <h1 style="color: #1c2e4a;">🎲 Risk-Reward Scenarios</h1>
     """, unsafe_allow_html=True)
 
     st.markdown("""
