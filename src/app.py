@@ -18,8 +18,8 @@ st.set_page_config(layout="wide")
 st.markdown("""
     <style>
     body {
-        color: #111;
-        background-color: #f0f2f6;
+        color: #111;  /* Black text color */
+        background-color: #f0f2f6;  /* Light Grey */
     }
     </style>
     """, unsafe_allow_html=True)
