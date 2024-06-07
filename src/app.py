@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Now import the module
 
 # Settings for Streamlit page appearance
-st.set_page_config(layout="wide", theme={'base': 'light'})
+st.set_page_config(layout="wide")
 
 # App theme settings as 'Light' by default
 st.markdown("""
