@@ -5,8 +5,8 @@
 
 ## Overview
 
-Risk Management Simulator is a Streamlit-based application designed to simulate some risk/return scenarios. 
-The simulator allows users to adjust various parameters and visualize the potential outcomes of different risk management scenarios.
+The Risk Management Simulator is a Streamlit-based application designed to simulate various risk/return scenarios. It allows users to adjust multiple parameters and visualize the potential outcomes of different risk management strategies.
+
 
 ## Features
 
