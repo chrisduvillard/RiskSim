@@ -1,3 +1,4 @@
+from config.slider_configs import SLIDER_CONFIGS
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as plotly_express
@@ -9,7 +10,6 @@ import os
 # Add the root directory to the PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Now import the module
-from config.slider_configs import SLIDER_CONFIGS
 
 # Settings for Streamlit page appearance
 st.set_page_config(layout="wide")
@@ -270,7 +270,11 @@ def app():
     risk_per_trade = st.sidebar.slider("Risk per Trade (%)", **SLIDER_CONFIGS["risk_per_trade"])
     return_per_unit_risk_value = st.sidebar.slider("Avg Return Per Unit Risk", **SLIDER_CONFIGS["return_per_unit_risk"])
     st.sidebar.markdown(
-        "<small><em>*RPUR: Return per Unit of Risk. This is the expected return for each unit of risk taken.</em></small>",
+        "<small><em>RPUR: Return per Unit of Risk. This is the expected return for each unit of risk taken.</em></small>",
+        unsafe_allow_html=True
+    )
+    st.sidebar.markdown(
+        "<small><em>The maximum drawdown is the largest loss you could experience if all your losing trades occurred consecutively.</em></small>",
         unsafe_allow_html=True
     )
 
