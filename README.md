@@ -108,4 +108,4 @@ Made with ❤️ by [Chris](https://github.com/chrisduvillard)
 
 ---
 
-Feel free to reach out if you have any questions or need further assistance.
+Feel free to reach out if you have any questions.
