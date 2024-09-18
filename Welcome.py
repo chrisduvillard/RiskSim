@@ -35,9 +35,13 @@ st.markdown("""
 # Use HTML and CSS to center the image and set its width
 st.markdown(
     """
-    <div style='text-align: center;'>
+    <div style='display: flex; justify-content: center;'>
         <img src='docs/images/header_image.jpg' width='700'>
-        <figcaption style="text-align: center;">Explore Risk and Portfolio Dynamics</figcaption>
+    </div>
+    <div style='text-align: center;'>
+        <figcaption style="text-align: center; color: gray; font-size: 0.9rem;">
+            Explore Risk and Portfolio Dynamics
+        </figcaption>
     </div>
     """,
     unsafe_allow_html=True
