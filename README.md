@@ -116,7 +116,7 @@ This project is licensed under the MIT License. See the [LICENSE.txt](LICENSE.tx
 
 ## Author
 
-Made with ❤️ by [Chris](https://github.com/chrisduvillard)
+Made with ❤️ by [Chris](https://www.linkedin.com/in/christopheduvillard/)
 
 ## Acknowledgments
 
