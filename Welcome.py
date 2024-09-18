@@ -29,7 +29,10 @@ st.markdown("""
 
 # Place an image in the app
 # Replace 'header_image.jpg' with the path to your image file
-st.image('docs/images/header_image.jpg', use_column_width=True, caption="Explore Risk and Portfolio Dynamics")
+# st.image('docs/images/header_image.jpg', use_column_width=True, caption="Explore Risk and Portfolio Dynamics")
+# Display the image with a reduced size (width set to 700px)
+st.image('docs/images/header_image.jpg', use_column_width=False, width=700, caption="Explore Risk and Portfolio Dynamics")
+
 
 # Explanations about the various pages
 st.markdown("""
