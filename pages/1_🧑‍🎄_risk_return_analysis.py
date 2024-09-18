@@ -1,12 +1,14 @@
-# from config.slider_configs import SLIDER_CONFIGS
-import numpy as np
-import plotly.graph_objects as go
-import plotly.express as plotly_express
-import streamlit as st
-from risk_simulation import TradingSimulator
 from style import footer, metric_box
+from risk_simulation import TradingSimulator
+import streamlit as st
+import plotly.express as plotly_express
+import plotly.graph_objects as go
+import numpy as np
 import sys
 import os
+# Add the root directory to the PYTHONPATH before importing modules
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 SLIDER_CONFIGS = {
     "trades_per_year": {"min_value": 5, "max_value": 100, "value": 30, "step": 5},
@@ -16,14 +18,10 @@ SLIDER_CONFIGS = {
     "num_simulations": {"min_value": 10_000, "max_value": 100_000, "value": 10_000, "step": 10_000},
 }
 
-# Add the root directory to the PYTHONPATH
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# Now import the module
+# Remove the page configuration settings (handled in main script)
+# st.set_page_config(layout="wide")
 
-# Settings for Streamlit page appearance
-st.set_page_config(layout="wide")
-
-# App theme settings as 'Light' by default
+# App theme settings can remain if needed
 st.markdown("""
     <style>
     body {
@@ -54,12 +52,12 @@ def create_bar_chart_figure(results, medians, return_per_unit_risk_value):
 
     # Calculate the range and tick intervals for the y-axis
     y_range = max_result - min_result
-    y_tick_interval = y_range / 10
+    y_tick_interval = y_range / 10 if y_range != 0 else 1
     y_ticks = np.arange(min_result, max_result + y_tick_interval, y_tick_interval)
     y_tick_labels = [f'{tick:.2f}%' for tick in y_ticks]
 
     # Normalize the data for color scaling
-    normalized_data = [(np.mean(data) - min_result) / (max_result - min_result) for _, data in sorted_results]
+    normalized_data = [(np.mean(data) - min_result) / (max_result - min_result) if (max_result - min_result) != 0 else 0.5 for _, data in sorted_results]
     colorscale = plotly_express.colors.sequential.Viridis
     colors = [colorscale[int(norm_val * (len(colorscale) - 1))] for norm_val in normalized_data]
 
@@ -99,7 +97,7 @@ def create_bar_chart_figure(results, medians, return_per_unit_risk_value):
 
     # Add an annotation for the selected RPUR value
     avg_return_for_annotation = np.mean(results[return_per_unit_risk_value])
-    annotation_y = avg_return_for_annotation + y_range * 0.05
+    annotation_y = avg_return_for_annotation + y_range * 0.05 if y_range != 0 else avg_return_for_annotation + 5
     fig.add_annotation(
         x=f'RPR {return_per_unit_risk_value:.2f}',
         y=annotation_y,
@@ -148,7 +146,7 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
         avg_returns.append(np.mean(percentage_returns))
 
     min_return, max_return = min(avg_returns), max(avg_returns)
-    normalized_data = [(ret - min_return) / (max_return - min_return) for ret in avg_returns]
+    normalized_data = [(ret - min_return) / (max_return - min_return) if (max_return - min_return) != 0 else 0.5 for ret in avg_returns]
     colorscale = plotly_express.colors.sequential.Viridis
     colors = [colorscale[int(norm_val * (len(colorscale) - 1))] for norm_val in normalized_data]
 
@@ -199,7 +197,7 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
     # Add an annotation for the selected win rate value
     if win_rate_value is not None:
         avg_return_for_annotation = np.interp(win_rate_value, win_rates, avg_returns)
-        annotation_y = avg_return_for_annotation + y_range * 0.05
+        annotation_y = avg_return_for_annotation + y_range * 0.05 if y_range != 0 else avg_return_for_annotation + 5
         fig.add_annotation(
             x=f"{win_rate_value}",
             y=annotation_y,
@@ -223,6 +221,18 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
 
 
 def simulate_trades(win_rate, num_trades_per_year, risk_per_trade, simulations=1000):
+    """
+    Simulate trades to calculate the average maximum drawdown over multiple simulations.
+
+    Args:
+        win_rate (float): The win rate as a percentage.
+        num_trades_per_year (int): The number of trades per year.
+        risk_per_trade (float): The risk per trade as a percentage.
+        simulations (int): The number of simulations to run.
+
+    Returns:
+        float: The average maximum drawdown.
+    """
     win_rate = win_rate / 100
 
     def max_drawdown(trades):
@@ -337,6 +347,6 @@ def app():
                 st.plotly_chart(win_rate_vs_return_fig, use_container_width=True)
 
 
-if __name__ == "__main__":
-    app()
-    footer()
+# Call the app function directly
+app()
+footer()
