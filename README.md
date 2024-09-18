@@ -1,14 +1,26 @@
 
 # RiskSim: Risk-Return and Asset Correlation Simulator
 
-**RiskSim** is a Python-based portfolio and risk simulation tool. It provides a streamlined interface to simulate risk-return analysis and portfolio performance with different asset correlation settings.
+**RiskSim** is a Python-based tool designed for portfolio and risk simulation. It offers an intuitive interface to model risk-return dynamics and assess portfolio performance under various asset correlation scenarios, providing deep insights into risk management strategies and investment outcomes.
 
 ## Features
 
 - **Risk-Return Analysis**: Simulate various risk-return scenarios using adjustable parameters like win rate, trades per year, risk per trade, and return per unit of risk (RPUR).
 - **Asset Correlation Simulator**: Generate and visualize portfolio performance based on customizable asset correlation matrices, with options for single or random correlation ranges.
-- **Performance Metrics**: Compute essential performance metrics such as cumulative return, annualized return, Sharpe ratio, Sortino ratio, and more.
-- **Interactive Visualizations**: Powered by Plotly, the app provides interactive charts for portfolio performance, correlation matrices, and risk-return scenarios.
+
+## Screenshots
+
+![Risk-Return Analysis Screenshot](docs/images/image.png)
+*Risk-Return Analysis Page*
+
+![Risk-Return Analysis Screenshot](docs/images/image_2.png)
+*Risk-Return Analysis Page*
+
+![Asset Correlation Screenshot](docs/images/image_3.png)
+*Asset Correlation Simulation Page*
+
+![Asset Correlation Screenshot](docs/images/image_4.png)
+*Asset Correlation Simulation Page*
 
 ## Project Structure
 
@@ -31,7 +43,9 @@ RiskSim/
 │   ├── header_image.jpg
 │   ├── image.png
 │   ├── image_1.png
-│   └── image_2.png
+│   ├── image_2.png
+│   ├── image_3.png
+│   └── image_4.png
 │
 ├── venv/                              # Python virtual environment (optional)
 ├── Welcome.py                         # Main entry point for the app
@@ -95,13 +109,6 @@ This will launch the **RiskSim** app in your browser.
 - Choose between fixed or random correlation settings.
 - Visualize performance and compute portfolio metrics under various correlation regimes.
 
-## Screenshots
-
-![Risk-Return Analysis Screenshot](docs/images/image.png)
-*Risk-Return Analysis Page*
-
-![Asset Correlation Screenshot](docs/images/image_2.png)
-*Asset Correlation Simulation Page*
 
 ## License
 
