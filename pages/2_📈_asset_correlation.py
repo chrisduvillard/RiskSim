@@ -108,6 +108,7 @@ trading_days_per_year = 252
 mean_daily_return = (1 + mean_annual_return) ** (1 / trading_days_per_year) - 1
 daily_volatility = annual_volatility / np.sqrt(trading_days_per_year)
 
+
 # Generate mean returns and volatilities per asset
 if randomize_mean:
     mean_vector = np.random.uniform(
