@@ -38,25 +38,15 @@ st.markdown("""
 **Navigate Through the App Using the Sidebar:**
 
 - **📊 Risk-Return Analysis**: 
-    - Explore how different trading parameters affect your expected returns and risks.
-    - Simulate various scenarios to understand potential outcomes.
-- **📈 Win Rate Analysis** *(Coming Soon)*:
-    - Dive deep into how win rate variations impact overall performance.
-    - Visualize the sensitivity of your strategy to changes in win rate.
-- **📉 Advanced Metrics** *(Coming Soon)*:
-    - Analyze advanced metrics like the Sharpe Ratio, Sortino Ratio, and more.
-    - Optimize your strategy with these key performance indicators for a comprehensive risk-return assessment.
+    - Simulate how various trading parameters, such as win rate, number of trades, and risk per trade, affect your overall performance.
+    - Use Monte Carlo simulations to explore potential outcomes based on your trading strategy.
+    - Visualize the trade-off between risk and return to optimize your approach.
 
----
-#### 💡 Why Use This App?
+- **🔗 Asset Correlation Simulation**:
+    - Generate portfolios of assets with different correlation structures, and simulate their price evolution over time.
+    - Adjust the number of assets, correlation range, and key return parameters to test portfolio performance.
+    - Analyze performance metrics such as Sharpe Ratio, Maximum Drawdown, and Annualized Return to assess the strength of your portfolio under various correlation regimes.
 
-In the world of trading and investing, **understanding risk** is fundamental. This app empowers you to:
-
-- **Visualize** how key trading parameters impact performance.
-- **Simulate** various scenarios to make data-driven decisions.
-- **Optimize** your strategy for improved risk-adjusted returns.
-
-Whether you're new to trading or an experienced professional, RiskSim is designed to offer valuable insights for improving your strategy.
 
 ---
 #### 📘 How to Get Started:
