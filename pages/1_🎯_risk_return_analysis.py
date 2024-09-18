@@ -273,7 +273,7 @@ def app():
     st.markdown("""
         <div style="text-align: center; padding: 22px;">
             <h4 style="color: #5D6D7E;">Stay Alive Long Enough to Get Lucky</h4>
-            <p style="font-style: italic; color: #5D6D7E;">Jason Shapiro</p>
+            <!---<p style="font-style: italic; color: #5D6D7E;">Jason Shapiro</p>
         </div>
     """, unsafe_allow_html=True)
 

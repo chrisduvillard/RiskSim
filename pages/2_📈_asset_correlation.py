@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
+import plotly.express as px
 
 # Set the page layout
 st.set_page_config(layout="wide")
@@ -22,15 +23,46 @@ st.sidebar.header("Simulation Parameters")
 # Number of assets
 num_assets = st.sidebar.slider("Number of Assets", min_value=1, max_value=50, value=10)
 
-# Correlation input
-correlation = st.sidebar.slider(
-    "Average Correlation between Assets",
-    min_value=-1.0,
-    max_value=1.0,
-    value=0.4,
-    step=0.01,
-    format="%.2f",
+# Correlation type
+st.sidebar.header("Correlation Parameters")
+corr_type = st.sidebar.selectbox(
+    "Correlation Type",
+    ("Use single correlation", "Specify correlation range"),
+    help="Choose how to set correlations between assets.",
 )
+
+if corr_type == "Use single correlation":
+    # Single correlation input
+    correlation = st.sidebar.slider(
+        "Average Correlation between Assets",
+        min_value=-1.0,
+        max_value=1.0,
+        value=0.4,
+        step=0.01,
+        format="%.2f",
+    )
+else:
+    # Correlation range inputs
+    min_corr = st.sidebar.slider(
+        "Minimum Correlation",
+        min_value=-1.0,
+        max_value=1.0,
+        value=-0.2,
+        step=0.01,
+        format="%.2f",
+        help="Minimum correlation between assets.",
+    )
+    max_corr = st.sidebar.slider(
+        "Maximum Correlation",
+        min_value=-1.0,
+        max_value=1.0,
+        value=0.6,
+        step=0.01,
+        format="%.2f",
+        help="Maximum correlation between assets.",
+    )
+    if min_corr > max_corr:
+        st.sidebar.error("Minimum correlation cannot be greater than maximum correlation.")
 
 # Number of years
 num_years = st.sidebar.slider(
@@ -94,25 +126,54 @@ else:
 # Generate the correlation matrix
 
 
-def generate_correlation_matrix(n, corr):
-    corr_matrix = np.full((n, n), corr)
-    np.fill_diagonal(corr_matrix, 1.0)
-    return corr_matrix
-
-# Ensure positive definiteness
-
-
 def is_positive_definite(matrix):
     return np.all(np.linalg.eigvals(matrix) > 0)
 
 
-corr_matrix = generate_correlation_matrix(num_assets, correlation)
+def nearest_positive_definite(A):
+    """Find the nearest positive-definite matrix to input A."""
+    B = (A + A.T) / 2
+    _, s, Vh = np.linalg.svd(B)
+    H = np.dot(Vh.T, np.dot(np.diag(s), Vh))
+    A2 = (B + H) / 2
+    A3 = (A2 + A2.T) / 2
+
+    if is_positive_definite(A3):
+        return A3
+
+    spacing = np.spacing(np.linalg.norm(A))
+    identity = np.eye(A.shape[0])
+    k = 1
+    while not is_positive_definite(A3):
+        min_eig = np.min(np.real(np.linalg.eigvals(A3)))
+        A3 += identity * (-min_eig * k**2 + spacing)
+        k += 1
+    return A3
+
+
+if corr_type == "Use single correlation":
+    def generate_correlation_matrix(n, corr):
+        corr_matrix = np.full((n, n), corr)
+        np.fill_diagonal(corr_matrix, 1.0)
+        return corr_matrix
+
+    corr_matrix = generate_correlation_matrix(num_assets, correlation)
+
+else:
+    def generate_random_correlation_matrix(n, min_corr, max_corr):
+        rng = np.random.default_rng()
+        random_corrs = rng.uniform(low=min_corr, high=max_corr, size=(n, n))
+        corr_matrix = (random_corrs + random_corrs.T) / 2  # Symmetrize
+        np.fill_diagonal(corr_matrix, 1.0)
+        return corr_matrix
+
+    corr_matrix = generate_random_correlation_matrix(num_assets, min_corr, max_corr)
+    corr_matrix = nearest_positive_definite(corr_matrix)
 
 # Check for positive definiteness
 if not is_positive_definite(corr_matrix):
     st.error(
-        f"The correlation matrix is not positive definite for correlation={correlation:.2f} "
-        f"and number of assets={num_assets}. Please adjust the correlation."
+        f"The correlation matrix is not positive definite. Please adjust the correlation settings."
     )
 else:
     # Number of trading days
@@ -248,14 +309,26 @@ else:
 
     st.table(styled_metrics_df)
 
-    # Show correlation matrix
+    # Show correlation matrix with Plotly heatmap
     st.header("Correlation Matrix")
     corr_df = pd.DataFrame(
         corr_matrix,
         columns=[f"Asset {i+1}" for i in range(num_assets)],
         index=[f"Asset {i+1}" for i in range(num_assets)],
     )
-    st.dataframe(corr_df.style.format("{:.2f}"))
+
+    # Create a heatmap using Plotly
+    fig_corr = px.imshow(
+        corr_df,
+        text_auto=".2f",
+        aspect="auto",
+        color_continuous_scale="RdBu",
+        origin="lower",
+        title="Asset Correlation Matrix",
+    )
+    fig_corr.update_layout(height=600)
+
+    st.plotly_chart(fig_corr, use_container_width=True)
 
     # Second chart: Portfolios with different correlations
     st.header("Portfolio Performance Across Different Correlations")
@@ -267,7 +340,11 @@ else:
 
     for corr in correlation_values:
         # Generate the correlation matrix
-        corr_matrix = generate_correlation_matrix(num_assets, corr)
+        if corr_type == "Use single correlation":
+            corr_matrix = generate_correlation_matrix(num_assets, corr)
+        else:
+            corr_matrix = generate_random_correlation_matrix(num_assets, min_corr, max_corr)
+            corr_matrix = nearest_positive_definite(corr_matrix)
 
         # Check for positive definiteness
         if not is_positive_definite(corr_matrix):
