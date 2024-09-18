@@ -32,20 +32,10 @@ st.markdown("""
 # st.image('docs/images/header_image.jpg', use_column_width=True, caption="Explore Risk and Portfolio Dynamics")
 # Display the image with a reduced size (width set to 700px)
 # st.image('docs/images/header_image.jpg', use_column_width=False, width=700, caption="Explore Risk and Portfolio Dynamics")
-# Use HTML and CSS to center the image and set its width
-st.markdown(
-    """
-    <div style='display: flex; justify-content: center;'>
-        <img src='docs/images/header_image.jpg' width='700'>
-    </div>
-    <div style='text-align: center;'>
-        <figcaption style="text-align: center; color: gray; font-size: 0.9rem;">
-            Explore Risk and Portfolio Dynamics
-        </figcaption>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Use st.image to display the image with a specified width and centered alignment
+st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+st.image('docs/images/header_image.jpg', width=700, caption="Explore Risk and Portfolio Dynamics")
+st.markdown("</div>", unsafe_allow_html=True)
 
 
 # Explanations about the various pages
