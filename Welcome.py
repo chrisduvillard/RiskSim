@@ -13,7 +13,7 @@ st.markdown("### Empowering Your Trading Decisions Through Risk Analysis")
 
 # Place an image in the app
 # Replace 'header_image.jpg' with the path to your image file
-st.image('header_image.jpg', use_column_width=False, width=700)  # Image width - 350 pixels
+st.image('docs/images/header_image.jpg', use_column_width=False, width=700)  # Image width - 350 pixels
 
 # Explanations about the various pages
 st.markdown("""

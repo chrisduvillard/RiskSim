@@ -1,111 +1,112 @@
 
-# Risk Management Simulator
+# RiskSim: Risk-Return and Asset Correlation Simulator
 
-![App Image](./image.png)
-
-## Overview
-
-The Risk Management Simulator is a Streamlit-based application designed to simulate various risk/return scenarios. It allows users to adjust multiple parameters and visualize the potential outcomes of different risk management strategies.
-
-**[Link to the app](https://risk-return-analysis.streamlit.app/)**
+**RiskSim** is a Python-based portfolio and risk simulation tool. It provides a streamlined interface to simulate risk-return analysis and portfolio performance with different asset correlation settings.
 
 ## Features
 
-- **Trading Simulations**: Simulate trading outcomes over a year with customizable parameters such as win rate, number of trades per year, and risk per trade.
-- **Interactive Charts**: Visualize average returns and win rates through interactive Plotly charts.
-
-## Installation
-
-To run the application locally, follow these steps:
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/chrisduvillard/RiskSim.git
-   cd RiskSim
-   ```
-
-2. Create and activate a virtual environment:
-   ```sh
-   python -m venv venv
-   source venv/bin/activate   # On Windows use `venv\Scripts\activate`
-   ```
-
-3. Install the required packages:
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-4. Run the Streamlit app:
-   ```sh
-   streamlit run src/app.py
-   ```
+- **Risk-Return Analysis**: Simulate various risk-return scenarios using adjustable parameters like win rate, trades per year, risk per trade, and return per unit of risk (RPUR).
+- **Asset Correlation Simulator**: Generate and visualize portfolio performance based on customizable asset correlation matrices, with options for single or random correlation ranges.
+- **Performance Metrics**: Compute essential performance metrics such as cumulative return, annualized return, Sharpe ratio, Sortino ratio, and more.
+- **Interactive Visualizations**: Powered by Plotly, the app provides interactive charts for portfolio performance, correlation matrices, and risk-return scenarios.
 
 ## Project Structure
 
-```
-risk-management-simulator/
+```bash
+RiskSim/
 │
-├── src/
-│   ├── app.py
-│   ├── style.py
-│   ├── risk_simulation.py
+├── pages/
+│   ├── 1_🎯_risk_return_analysis.py   # Main page for risk-return simulations
+│   └── 2_📈_asset_correlation.py     # Main page for asset correlation simulations
 │
 ├── config/
-│   ├── slider_configs.py
-│   ├── __init__.py
+│   ├── slider_configs.py              # Configuration for slider inputs in the Streamlit UI
+│   └── __init__.py                    # Init file for config
 │
-├── venv/
+├── utils/
+│   ├── risk_simulation.py             # Core simulation logic for risk management and portfolio performance
+│   └── style.py                       # Styling and layout helpers for Streamlit app
 │
-├── requirements.txt
-├── README.md
-├── LICENSE.txt
-|── image.png
-|── image_1.png
-└── image_2.png
+├── docs/images/                       # Image assets for documentation and app UI
+│   ├── header_image.jpg
+│   ├── image.png
+│   ├── image_1.png
+│   └── image_2.png
+│
+├── venv/                              # Python virtual environment (optional)
+├── Welcome.py                         # Main entry point for the app
+├── README.md                          # This file
+├── LICENSE.txt                        # License information
+├── .gitignore                         # Files and directories to be ignored by git
+└── requirements.txt                   # Python dependencies
 ```
+
+## Installation
+
+To get started with **RiskSim**, follow these steps:
+
+### Prerequisites
+
+Ensure you have Python 3.8+ installed. You'll also need `pip` to install the required dependencies.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/RiskSim.git
+cd RiskSim
+```
+
+### Create a Virtual Environment (Optional but Recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scriptsctivate`
+```
+
+### Install Dependencies
+
+Install the required Python packages by running:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the Application
+
+Start the application using Streamlit:
+
+```bash
+streamlit run Welcome.py
+```
+
+This will launch the **RiskSim** app in your browser.
 
 ## Usage
 
-1. Adjust the simulation parameters using the sliders in the sidebar.
-2. Click on "Run Simulation" to see the results.
-3. Explore the results through the "RPUR Analysis" and "Win Rate Analysis" tabs.
+### Risk-Return Analysis
 
-## Example
+- Navigate to the **Risk-Return Analysis** section to simulate various risk-return scenarios.
+- You can adjust the number of trades per year, win rate, risk per trade, and RPUR.
+- View detailed metrics such as expected drawdown, Sharpe ratio, and more.
+  
+### Asset Correlation Simulation
 
-### Simulation Parameters
-- Number of Trades per Year: 30
-- Win Rate: 40%
-- Risk per Trade: 1%
-- Return Per Unit Risk: 3x
+- Use the **Asset Correlation** page to simulate portfolios with different asset correlations.
+- Choose between fixed or random correlation settings.
+- Visualize performance and compute portfolio metrics under various correlation regimes.
 
-### Visualization
+## Screenshots
 
-Display the expected annualized return for different return per unit risk values.
+![Risk-Return Analysis Screenshot](docs/images/image.png)
+*Risk-Return Analysis Page*
 
-![App Image](./image_1.png)
-
-Display the expected annualized return for different win rates.
-
-![App Image](./image_2.png)
-
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit pull requests for any features, bug fixes, or improvements.
+![Asset Correlation Screenshot](docs/images/image_2.png)
+*Asset Correlation Simulation Page*
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the MIT License. See the [LICENSE.txt](LICENSE.txt) file for details.
 
-## Author
+## Contributing
 
-Made with ❤️ by [Chris](https://github.com/chrisduvillard)
-
-## Acknowledgments
-
-- Streamlit
-- Plotly
-
----
-
-Feel free to reach out if you have any questions.
+Contributions are welcome! Feel free to fork the repository, make improvements, and submit a pull request.
