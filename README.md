@@ -5,7 +5,7 @@
 
 ## Link to the app
 
-[Click here to access the app](risk-return-analysis.streamlit.app)
+[Click here to access the app](https://risk-return-analysis.streamlit.app/)
 
 ## Features
 
