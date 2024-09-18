@@ -3,6 +3,10 @@
 
 **RiskSim** is a Python-based tool designed for portfolio and risk simulation. It offers an intuitive interface to model risk-return dynamics and assess portfolio performance under various asset correlation scenarios, providing deep insights into risk management strategies and investment outcomes.
 
+## Link to the app
+
+[Click here to access the app](risk-return-analysis.streamlit.app)
+
 ## Features
 
 - **Risk-Return Analysis**: Simulate various risk-return scenarios using adjustable parameters like win rate, trades per year, risk per trade, and return per unit of risk (RPUR).
