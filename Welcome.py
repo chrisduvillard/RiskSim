@@ -31,7 +31,17 @@ st.markdown("""
 # Replace 'header_image.jpg' with the path to your image file
 # st.image('docs/images/header_image.jpg', use_column_width=True, caption="Explore Risk and Portfolio Dynamics")
 # Display the image with a reduced size (width set to 700px)
-st.image('docs/images/header_image.jpg', use_column_width=False, width=700, caption="Explore Risk and Portfolio Dynamics")
+# st.image('docs/images/header_image.jpg', use_column_width=False, width=700, caption="Explore Risk and Portfolio Dynamics")
+# Use HTML and CSS to center the image and set its width
+st.markdown(
+    """
+    <div style='text-align: center;'>
+        <img src='docs/images/header_image.jpg' width='700'>
+        <figcaption style="text-align: center;">Explore Risk and Portfolio Dynamics</figcaption>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # Explanations about the various pages
