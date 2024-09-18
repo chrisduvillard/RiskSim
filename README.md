@@ -114,6 +114,15 @@ This will launch the **RiskSim** app in your browser.
 
 This project is licensed under the MIT License. See the [LICENSE.txt](LICENSE.txt) file for details.
 
+## Author
+
+Made with ❤️ by [Chris](https://github.com/chrisduvillard)
+
+## Acknowledgments
+
+- Streamlit
+- Plotly
+
 ## Contributing
 
 Contributions are welcome! Feel free to fork the repository, make improvements, and submit a pull request.
