@@ -323,7 +323,8 @@ else:
         corr_df,
         text_auto=".2f",
         aspect="auto",
-        color_continuous_scale="RdBu",
+        # color_continuous_scale="RdBu",
+        color_continuous_scale="viridis",
         origin="lower",
         title="Asset Correlation Matrix",
     )
