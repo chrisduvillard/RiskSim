@@ -33,7 +33,7 @@ st.markdown("""
 # Display the image with a reduced size (width set to 700px)
 # st.image('docs/images/header_image.jpg', use_column_width=False, width=700, caption="Explore Risk and Portfolio Dynamics")
 # Use st.image to display the image with a specified width and centered alignment
-col1, col2, col3 = st.beta_columns([1, 6, 1])
+col1, col2, col3 = st.columns([1, 6, 1])
 with col2:
     st.image('docs/images/header_image.jpg', width=700)
 
