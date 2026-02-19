@@ -36,13 +36,10 @@ def _add_expected_return_annotation(
         arrowsize=1.5,
         ax=0,
         ay=-30,
-        font=dict(family="Arial, sans-serif", size=14, color="black"),
+        font=dict(family="Arial, sans-serif", size=14),
         align="center",
-        arrowcolor="black",
-        bordercolor="black",
         borderwidth=1,
         borderpad=4,
-        bgcolor="rgba(255, 255, 255, 0.9)",
         opacity=0.9,
     )
 
@@ -62,7 +59,6 @@ def create_bar_chart_figure(
     y_tick_interval = y_range / 10 if y_range != 0 else 1
     y_ticks = np.arange(min_result, max_result + y_tick_interval, y_tick_interval)
 
-    # Single trace with per-bar colors so categorical axis works correctly
     fig = go.Figure(go.Bar(
         x=x_labels,
         y=averages,
@@ -72,7 +68,7 @@ def create_bar_chart_figure(
                    for (rpur, _), avg in zip(sorted_results, averages)],
         text=[f"{avg:.2f}%" for avg in averages],
         textposition="outside",
-        textfont=dict(size=12, color="black"),
+        textfont=dict(size=12),
     ))
 
     fig.update_layout(
@@ -81,12 +77,11 @@ def create_bar_chart_figure(
             title="Average Percentage Return (%)",
             tickvals=y_ticks,
             ticktext=[f"{t:.2f}%" for t in y_ticks],
-            showgrid=True, gridwidth=1, gridcolor="LightGrey",
+            showgrid=True, gridwidth=1,
         ),
         xaxis=dict(tickangle=-45, automargin=True),
         showlegend=False,
         height=600,
-        font=dict(family="Helvetica, sans-serif", size=12, color="#333"),
     )
     fig.add_hline(y=0, line_dash="dash", line_color="gray")
 
@@ -130,7 +125,6 @@ def create_win_rate_vs_return_chart(
         10,
     )
 
-    # Single trace with per-bar colors so categorical axis works correctly
     fig = go.Figure(go.Bar(
         x=x_labels,
         y=avg_returns,
@@ -154,11 +148,10 @@ def create_win_rate_vs_return_chart(
             title="Average Percentage Return (%)",
             tickvals=y_ticks,
             ticktext=[f"{t}%" for t in y_ticks],
-            showgrid=True, gridwidth=1, gridcolor="LightGrey",
+            showgrid=True, gridwidth=1,
             range=[np.floor(min_return / 10) * 10, np.ceil(max_return / 10) * 10],
         ),
         showlegend=False,
-        font=dict(family="Helvetica, sans-serif", size=12, color="#333"),
         height=600,
     )
     fig.add_hline(y=0, line_dash="dash", line_color="gray")
@@ -177,13 +170,10 @@ def create_win_rate_vs_return_chart(
 
 def app() -> None:
     """Main function for the Risk-Return Analysis page."""
-    st.markdown(
-        '<h1 style="color: #1c2e4a;">Risk-Return Analysis</h1>',
-        unsafe_allow_html=True,
-    )
+    st.header("Risk-Return Analysis")
     st.markdown("""
-        <div style="text-align: center; padding: 22px;">
-            <h4 style="color: #5D6D7E;">Stay Alive Long Enough to Get Lucky</h4>
+        <div style="text-align: center; padding: 12px 0 22px 0;">
+            <h4 style="opacity: 0.6;">Stay Alive Long Enough to Get Lucky</h4>
         </div>
     """, unsafe_allow_html=True)
 
