@@ -1,131 +1,198 @@
+# RiskSim
 
-# RiskSim: Risk-Return and Asset Correlation Simulator
+**Interactive risk management simulator for traders and portfolio managers.**
 
-**RiskSim** is a Python-based tool designed for portfolio and risk simulation. It offers an intuitive interface to model risk-return dynamics and assess portfolio performance under various asset correlation scenarios, providing deep insights into risk management strategies and investment outcomes.
+RiskSim helps you understand how trading parameters and asset correlations affect portfolio outcomes. It uses Monte Carlo simulation and correlated Brownian motion to model thousands of scenarios, giving you a realistic picture of expected returns, drawdowns, and diversification benefits.
 
-## Link to the app
+[![CI](https://github.com/chrisduvillard/RiskSim/actions/workflows/ci.yml/badge.svg)](https://github.com/chrisduvillard/RiskSim/actions/workflows/ci.yml)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://risk-return-analysis.streamlit.app/)
 
-[Click here to access the app](https://risk-return-analysis.streamlit.app/)
+---
 
 ## Features
 
-- **Risk-Return Analysis**: Simulate various risk-return scenarios using adjustable parameters like win rate, trades per year, risk per trade, and return per unit of risk (RPUR). Uses Monte Carlo simulation to estimate expected returns and drawdowns.
-- **Asset Correlation Simulator**: Generate and visualize portfolio performance based on customizable asset correlation matrices, with options for single or random correlation ranges. Computes Sharpe, Sortino, Calmar ratios, max drawdown, and more.
+### Risk-Return Analysis
+
+Explore how win rate, trade frequency, position sizing, and reward-to-risk ratio interact to produce your expected P&L.
+
+- **Monte Carlo engine** &mdash; runs up to 100,000 simulations per parameter set
+- **RPUR sweep** &mdash; bar chart of average return across 16 Return Per Unit Risk levels (0.5x to 8x)
+- **Win-rate sweep** &mdash; bar chart of average return across win rates (28% to 70%)
+- **Drawdown estimation** &mdash; expected and worst-case consecutive-loss drawdown
+- **Live metrics** &mdash; trades/year, win rate, risk/trade, RPUR, expected drawdown, max drawdown
+
+| Parameter | Range | Default |
+|---|---|---|
+| Trades per year | 5 &ndash; 100 | 30 |
+| Win rate | 28% &ndash; 70% | 40% |
+| Risk per trade | 0.25% &ndash; 5% | 1% |
+| Return per unit risk | 0.5x &ndash; 8x | 3x |
+| Simulations | 10,000 &ndash; 100,000 | 10,000 |
+
+### Asset Correlation Simulator
+
+Generate synthetic multi-asset portfolios and see how correlation structure drives risk and return.
+
+- **Flexible correlation** &mdash; set a single uniform correlation or a random range (min/max)
+- **Configurable assets** &mdash; 1 to 50 assets, 1 to 10 years of simulated prices
+- **Randomization** &mdash; optionally vary mean returns and volatilities across assets
+- **Performance metrics** &mdash; Sharpe, Sortino, Calmar ratios, annualized return/volatility, max drawdown
+- **Correlation sweep** &mdash; compares portfolio performance across correlation levels from -1.0 to +1.0
+- **Heatmap** &mdash; visualize the realized correlation matrix
+
+---
 
 ## Screenshots
 
-![Risk-Return Analysis Screenshot](docs/images/image.png)
-*Risk-Return Analysis Page*
+<table>
+  <tr>
+    <td><img src="docs/images/image.png" alt="RPUR Analysis" width="100%"></td>
+    <td><img src="docs/images/image_2.png" alt="Win Rate Analysis" width="100%"></td>
+  </tr>
+  <tr>
+    <td><em>RPUR sweep &mdash; average return by reward-to-risk ratio</em></td>
+    <td><em>Win-rate sweep &mdash; average return by win rate</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/image_3.png" alt="Asset Price Simulation" width="100%"></td>
+    <td><img src="docs/images/image_4.png" alt="Correlation Heatmap" width="100%"></td>
+  </tr>
+  <tr>
+    <td><em>Synthetic asset price paths with portfolio overlay</em></td>
+    <td><em>Portfolio performance across different correlation regimes</em></td>
+  </tr>
+</table>
 
-![Risk-Return Analysis Screenshot](docs/images/image_2.png)
-*Risk-Return Analysis Page*
+---
 
-![Asset Correlation Screenshot](docs/images/image_3.png)
-*Asset Correlation Simulation Page*
-
-![Asset Correlation Screenshot](docs/images/image_4.png)
-*Asset Correlation Simulation Page*
-
-## Project Structure
-
-```
-RiskSim/
-├── Welcome.py                         # Streamlit entrypoint (landing page)
-├── pages/
-│   ├── 1_🎯_risk_return_analysis.py   # Risk-return Monte Carlo simulation
-│   └── 2_📈_asset_correlation.py      # Asset correlation portfolio simulator
-├── config/
-│   └── slider_configs.py              # Centralized slider defaults and bounds
-├── utils/
-│   ├── risk_simulation.py             # TradingSimulator class + drawdown simulation
-│   └── style.py                       # Footer and metric box HTML helpers
-├── tests/
-│   ├── test_risk_simulation.py        # Tests for simulation logic
-│   └── test_style.py                  # Tests for style helpers
-├── docs/
-│   ├── audit_report.md                # Codebase audit report
-│   └── images/                        # Screenshots and header image
-├── .github/workflows/ci.yml           # GitHub Actions CI (ruff + pytest)
-├── pyproject.toml                     # Ruff and pytest configuration
-├── requirements.txt                   # Python dependencies
-├── CHANGELOG.md                       # Change log
-├── LICENSE.txt                        # MIT License
-└── README.md
-```
-
-## Setup
+## Getting Started
 
 ### Prerequisites
 
-- Python 3.10 or higher
-- pip
+- Python 3.10+
 
-### Installation
+### Install
 
 ```bash
-# Clone the repository
 git clone https://github.com/chrisduvillard/RiskSim.git
 cd RiskSim
-
-# Create and activate a virtual environment
 python -m venv .venv
-# On Windows:
+
+# Activate the virtual environment
+# Windows:
 .venv\Scripts\activate
-# On macOS/Linux:
+# macOS / Linux:
 source .venv/bin/activate
 
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### Run the App
+### Run
 
 ```bash
 streamlit run Welcome.py
 ```
 
-This launches the app in your browser. Use the sidebar to navigate between pages.
+The app opens in your browser. Use the sidebar to navigate between pages, adjust parameters, and click **Run Simulation**.
 
-### Run Tests
+---
+
+## Development
+
+### Run tests
 
 ```bash
 pip install pytest
 pytest -v
 ```
 
-### Run Linter
+### Lint
 
 ```bash
 pip install ruff
 ruff check .
 ```
 
-## Methodology
+### CI
 
-### Risk-Return Analysis
+GitHub Actions runs both `ruff check .` and `pytest` on every push and PR against `main` (Python 3.10 and 3.12).
 
-The Risk-Return Analysis page uses **Monte Carlo simulation** to model trading outcomes. Given a set of parameters (number of trades per year, win rate, risk per trade, and return per unit of risk), the simulator:
+---
 
-1. Generates random trade sequences where each trade is a win or loss based on the specified win rate
-2. Applies compounding: each trade's P&L is a percentage of the *current* AUM (not the initial capital)
-3. Repeats this process thousands of times to build a distribution of outcomes
-4. Reports average returns across different RPUR levels and win rates
-5. Estimates the expected maximum consecutive-loss drawdown
+## How It Works
 
-### Asset Correlation Simulation
+### Risk-Return Analysis &mdash; Monte Carlo Trading Simulation
 
-The Asset Correlation page generates synthetic multi-asset portfolios using **correlated geometric Brownian motion**:
+The simulator models a year of trading as a sequence of independent bets:
 
-1. Builds a correlation matrix (uniform or random within a range), ensuring positive definiteness
-2. Constructs a covariance matrix from per-asset volatilities and the correlation matrix
-3. Samples multivariate normal log-returns and converts to price paths
-4. Computes per-asset and portfolio performance metrics (Sharpe, Sortino, Calmar, max drawdown)
-5. Sweeps across correlation levels to show how diversification affects portfolio risk
+1. Each trade risks a fixed percentage of **current** AUM (compounding, not flat sizing).
+2. Wins return `risk_amount * RPUR`; losses lose `risk_amount`.
+3. Trade outcomes are shuffled randomly each simulation to capture path dependency.
+4. The process repeats thousands of times to build a distribution of final portfolio values.
+5. Drawdown is estimated by counting the longest streak of consecutive losses across simulations.
+
+This reveals the non-obvious interaction between win rate and reward-to-risk: a 35% win rate with a 4:1 payoff can outperform a 55% win rate with a 1.5:1 payoff.
+
+### Asset Correlation &mdash; Correlated Geometric Brownian Motion
+
+The portfolio simulator generates realistic multi-asset price paths:
+
+1. **Correlation matrix** &mdash; either uniform (all pairs share the same correlation) or random within a user-specified range. Non-positive-definite matrices are projected to the nearest valid matrix.
+2. **Covariance matrix** &mdash; constructed from per-asset volatilities and the correlation matrix (`S @ C @ S`).
+3. **Log-returns** &mdash; sampled from a multivariate normal distribution with drift adjustment (`mu - 0.5 * sigma^2`) to ensure prices follow geometric Brownian motion.
+4. **Metrics** &mdash; computed from the resulting price paths: annualized return, volatility, max drawdown, and risk-adjusted ratios (Sharpe, Sortino, Calmar).
+5. **Correlation sweep** &mdash; the entire simulation is repeated across correlation levels from -1.0 to +1.0 to illustrate the diversification benefit.
+
+---
+
+## Project Structure
+
+```
+RiskSim/
+├── Welcome.py                          # Streamlit entrypoint
+├── pages/
+│   ├── 1_🎯_risk_return_analysis.py    # Risk-return Monte Carlo page
+│   └── 2_📈_asset_correlation.py       # Correlation portfolio page
+├── config/
+│   └── slider_configs.py               # Centralized slider defaults
+├── utils/
+│   ├── risk_simulation.py              # TradingSimulator + drawdown estimation
+│   └── style.py                        # Footer and metric box helpers
+├── tests/
+│   ├── test_risk_simulation.py         # Simulation logic tests
+│   └── test_style.py                   # Style helper tests
+├── .github/workflows/ci.yml            # CI pipeline
+├── pyproject.toml                      # Ruff + pytest config
+├── requirements.txt                    # Dependencies
+├── CHANGELOG.md
+├── LICENSE.txt                         # MIT
+└── README.md
+```
+
+---
+
+## Tech Stack
+
+| Layer | Tool |
+|---|---|
+| App framework | [Streamlit](https://streamlit.io/) |
+| Visualization | [Plotly](https://plotly.com/python/) |
+| Numerical engine | [NumPy](https://numpy.org/) + [Pandas](https://pandas.pydata.org/) |
+| Styling | [htbuilder](https://github.com/tvst/htbuilder) |
+| Linting | [Ruff](https://docs.astral.sh/ruff/) |
+| Testing | [pytest](https://docs.pytest.org/) |
+| CI | [GitHub Actions](https://github.com/features/actions) |
+
+---
+
+## Contributing
+
+Contributions are welcome. Fork the repo, create a branch, and open a pull request. Please make sure `ruff check .` and `pytest` pass before submitting.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE.txt](LICENSE.txt) file for details.
+MIT &mdash; see [LICENSE.txt](LICENSE.txt).
 
 ## Author
 
-Made by [Christophe Duvillard](https://www.linkedin.com/in/christopheduvillard/)
+Built by [Christophe Duvillard](https://www.linkedin.com/in/christopheduvillard/)
