@@ -44,20 +44,39 @@ Generate synthetic multi-asset portfolios and see how correlation structure driv
 
 ## Screenshots
 
+The app fully supports both light and dark themes.
+
 ### Welcome Page
 
-![Welcome page](docs/images/welcome.png)
+<table>
+  <tr>
+    <td><img src="docs/images/welcome_light.png" alt="Welcome page (light)" width="100%"></td>
+    <td><img src="docs/images/welcome_dark.png" alt="Welcome page (dark)" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Light mode</em></td>
+    <td align="center"><em>Dark mode</em></td>
+  </tr>
+</table>
 
 ### Risk-Return Analysis
 
 <table>
   <tr>
-    <td><img src="docs/images/risk_return_rpur.png" alt="RPUR Analysis" width="100%"></td>
-    <td><img src="docs/images/risk_return_winrate.png" alt="Win Rate Analysis" width="100%"></td>
+    <td><img src="docs/images/risk_return_rpur_light.png" alt="RPUR Analysis (light)" width="100%"></td>
+    <td><img src="docs/images/risk_return_rpur_dark.png" alt="RPUR Analysis (dark)" width="100%"></td>
   </tr>
   <tr>
-    <td><em>RPUR sweep &mdash; average return by reward-to-risk ratio</em></td>
-    <td><em>Win-rate sweep &mdash; average return by win rate</em></td>
+    <td align="center"><em>RPUR sweep &mdash; light mode</em></td>
+    <td align="center"><em>RPUR sweep &mdash; dark mode</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/risk_return_winrate_light.png" alt="Win Rate Analysis (light)" width="100%"></td>
+    <td><img src="docs/images/risk_return_winrate_dark.png" alt="Win Rate Analysis (dark)" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Win-rate sweep &mdash; light mode</em></td>
+    <td align="center"><em>Win-rate sweep &mdash; dark mode</em></td>
   </tr>
 </table>
 
@@ -65,18 +84,28 @@ Generate synthetic multi-asset portfolios and see how correlation structure driv
 
 <table>
   <tr>
-    <td><img src="docs/images/correlation_prices.png" alt="Asset Price Simulation" width="100%"></td>
-    <td><img src="docs/images/correlation_heatmap.png" alt="Correlation Matrix Heatmap" width="100%"></td>
+    <td><img src="docs/images/correlation_prices_light.png" alt="Asset Prices (light)" width="100%"></td>
+    <td><img src="docs/images/correlation_prices_dark.png" alt="Asset Prices (dark)" width="100%"></td>
   </tr>
   <tr>
-    <td><em>Synthetic asset price paths with portfolio overlay</em></td>
-    <td><em>Performance metrics and correlation matrix heatmap</em></td>
+    <td align="center"><em>Synthetic asset price paths &mdash; light mode</em></td>
+    <td align="center"><em>Synthetic asset price paths &mdash; dark mode</em></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/images/correlation_sweep.png" alt="Correlation Sweep" width="100%"></td>
+    <td><img src="docs/images/correlation_heatmap_light.png" alt="Correlation Heatmap (light)" width="100%"></td>
+    <td><img src="docs/images/correlation_heatmap_dark.png" alt="Correlation Heatmap (dark)" width="100%"></td>
   </tr>
   <tr>
-    <td colspan="2"><em>Portfolio performance across different correlation regimes</em></td>
+    <td align="center"><em>Correlation matrix heatmap &mdash; light mode</em></td>
+    <td align="center"><em>Correlation matrix heatmap &mdash; dark mode</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/correlation_sweep_light.png" alt="Correlation Sweep (light)" width="100%"></td>
+    <td><img src="docs/images/correlation_sweep_dark.png" alt="Correlation Sweep (dark)" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Correlation sweep &mdash; light mode</em></td>
+    <td align="center"><em>Correlation sweep &mdash; dark mode</em></td>
   </tr>
 </table>
 
