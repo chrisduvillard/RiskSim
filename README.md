@@ -44,22 +44,39 @@ Generate synthetic multi-asset portfolios and see how correlation structure driv
 
 ## Screenshots
 
+### Welcome Page
+
+![Welcome page](docs/images/welcome.png)
+
+### Risk-Return Analysis
+
 <table>
   <tr>
-    <td><img src="docs/images/image.png" alt="RPUR Analysis" width="100%"></td>
-    <td><img src="docs/images/image_2.png" alt="Win Rate Analysis" width="100%"></td>
+    <td><img src="docs/images/risk_return_rpur.png" alt="RPUR Analysis" width="100%"></td>
+    <td><img src="docs/images/risk_return_winrate.png" alt="Win Rate Analysis" width="100%"></td>
   </tr>
   <tr>
     <td><em>RPUR sweep &mdash; average return by reward-to-risk ratio</em></td>
     <td><em>Win-rate sweep &mdash; average return by win rate</em></td>
   </tr>
+</table>
+
+### Asset Correlation Simulator
+
+<table>
   <tr>
-    <td><img src="docs/images/image_3.png" alt="Asset Price Simulation" width="100%"></td>
-    <td><img src="docs/images/image_4.png" alt="Correlation Heatmap" width="100%"></td>
+    <td><img src="docs/images/correlation_prices.png" alt="Asset Price Simulation" width="100%"></td>
+    <td><img src="docs/images/correlation_heatmap.png" alt="Correlation Matrix Heatmap" width="100%"></td>
   </tr>
   <tr>
     <td><em>Synthetic asset price paths with portfolio overlay</em></td>
-    <td><em>Portfolio performance across different correlation regimes</em></td>
+    <td><em>Performance metrics and correlation matrix heatmap</em></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/images/correlation_sweep.png" alt="Correlation Sweep" width="100%"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><em>Portfolio performance across different correlation regimes</em></td>
   </tr>
 </table>
 
