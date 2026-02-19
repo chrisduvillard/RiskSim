@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
-from htbuilder import HtmlElement, div, hr, a, p, styles
+from htbuilder import HtmlElement, a, div, hr, p, styles
 from htbuilder.units import percent, px
 
 

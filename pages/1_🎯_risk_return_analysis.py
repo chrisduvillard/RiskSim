@@ -1,10 +1,11 @@
-from utils.style import footer, metric_box
-from utils.risk_simulation import TradingSimulator, simulate_drawdown
-from config.slider_configs import SLIDER_CONFIGS
-import streamlit as st
+import numpy as np
 import plotly.express as plotly_express
 import plotly.graph_objects as go
-import numpy as np
+import streamlit as st
+
+from config.slider_configs import SLIDER_CONFIGS
+from utils.risk_simulation import TradingSimulator, simulate_drawdown
+from utils.style import footer, metric_box
 
 
 def _viridis_colors(values: list[float]) -> list[str]:

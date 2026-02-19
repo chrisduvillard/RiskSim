@@ -44,7 +44,7 @@ st.markdown("""
 #### 🔍 Explore the Features of RiskSim:
 **Navigate Through the App Using the Sidebar:**
 
-- **📊 Risk-Return Analysis**: 
+- **📊 Risk-Return Analysis**:
     - Simulate how various trading parameters, such as win rate, number of trades, and risk per trade, affect your overall performance.
     - Use Monte Carlo simulations to explore potential outcomes based on your trading strategy.
     - Visualize the trade-off between risk and return to optimize your approach.
