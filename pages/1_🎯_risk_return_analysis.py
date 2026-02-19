@@ -53,27 +53,27 @@ def create_bar_chart_figure(
 ) -> go.Figure:
     """Bar chart of average % return over different RPUR levels."""
     sorted_results = sorted(results.items(), key=lambda x: np.mean(x[1]))
-    averages = [np.mean(data) for _, data in sorted_results]
+    averages = [float(np.mean(data)) for _, data in sorted_results]
     colors = _viridis_colors(averages)
+    x_labels = [f"RPR {rpur:.2f}" for rpur, _ in sorted_results]
 
     min_result, max_result = min(averages), max(averages)
     y_range = max_result - min_result
     y_tick_interval = y_range / 10 if y_range != 0 else 1
     y_ticks = np.arange(min_result, max_result + y_tick_interval, y_tick_interval)
 
-    fig = go.Figure()
-    for i, (rpur, data) in enumerate(sorted_results):
-        avg = averages[i]
-        fig.add_trace(go.Bar(
-            x=[f"RPR {rpur:.2f}"],
-            y=[avg],
-            marker_color=colors[i],
-            hoverinfo="text",
-            hovertext=f"RPUR: {rpur:.2f}<br>Avg Return: {avg:.2f}%",
-            text=[f"{avg:.2f}%"],
-            textposition="outside",
-            textfont=dict(size=12, color="black"),
-        ))
+    # Single trace with per-bar colors so categorical axis works correctly
+    fig = go.Figure(go.Bar(
+        x=x_labels,
+        y=averages,
+        marker_color=colors,
+        hoverinfo="text",
+        hovertext=[f"RPUR: {rpur:.2f}<br>Avg Return: {avg:.2f}%"
+                   for (rpur, _), avg in zip(sorted_results, averages)],
+        text=[f"{avg:.2f}%" for avg in averages],
+        textposition="outside",
+        textfont=dict(size=12, color="black"),
+    ))
 
     fig.update_layout(
         title="Average Percentage Return Over Different Levels of Return Per Unit Risk",
@@ -90,7 +90,7 @@ def create_bar_chart_figure(
     )
     fig.add_hline(y=0, line_dash="dash", line_color="gray")
 
-    avg_return_for_annotation = np.mean(results[return_per_unit_risk_value])
+    avg_return_for_annotation = float(np.mean(results[return_per_unit_risk_value]))
     _add_expected_return_annotation(
         fig,
         x_label=f"RPR {return_per_unit_risk_value:.2f}",
@@ -121,6 +121,7 @@ def create_win_rate_vs_return_chart(
         avg_returns.append(float(np.mean(pct_returns)))
 
     colors = _viridis_colors(avg_returns)
+    x_labels = [f"WR {r:.0f}" for r in win_rates]
     min_return, max_return = min(avg_returns), max(avg_returns)
     y_range = max_return - min_return
     y_ticks = np.arange(
@@ -129,25 +130,25 @@ def create_win_rate_vs_return_chart(
         10,
     )
 
-    fig = go.Figure()
-    for i, (rate, ret) in enumerate(zip(win_rates, avg_returns)):
-        fig.add_trace(go.Bar(
-            x=[f"{rate}%"],
-            y=[ret],
-            text=[f"{ret:.2f}%"],
-            textposition="inside" if ret < 0 else "outside",
-            marker_color=colors[i],
-            textfont=dict(color="white" if ret < 0 else "black", size=12),
-            hoverinfo="text",
-            hovertext=f"Win Rate: {rate}%<br>Return: {ret:.2f}%",
-        ))
+    # Single trace with per-bar colors so categorical axis works correctly
+    fig = go.Figure(go.Bar(
+        x=x_labels,
+        y=avg_returns,
+        text=[f"{r:.2f}%" for r in avg_returns],
+        textposition=["inside" if r < 0 else "outside" for r in avg_returns],
+        marker_color=colors,
+        textfont=dict(size=12),
+        hoverinfo="text",
+        hovertext=[f"Win Rate: {wr:.0f}%<br>Return: {r:.2f}%"
+                   for wr, r in zip(win_rates, avg_returns)],
+    ))
 
     fig.update_layout(
         title="Average Percentage Return vs. Win Rate",
         xaxis=dict(
             title="Win Rate (%)",
-            tickvals=win_rates,
-            ticktext=[f"{t}%" for t in win_rates],
+            tickangle=-45,
+            automargin=True,
         ),
         yaxis=dict(
             title="Average Percentage Return (%)",
@@ -166,7 +167,7 @@ def create_win_rate_vs_return_chart(
         avg_for_annotation = float(np.interp(win_rate_value, win_rates, avg_returns))
         _add_expected_return_annotation(
             fig,
-            x_label=f"{win_rate_value}%",
+            x_label=f"WR {win_rate_value:.0f}",
             y_value=avg_for_annotation,
             y_range=y_range,
         )
