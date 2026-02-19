@@ -110,7 +110,7 @@ def layout(*args):
                     var bgColor = window.getComputedStyle(stApp_css).backgroundColor.replace("rgb(", "").replace(")", "").split(", ");
                     var fontColor = rgbReverse(bgColor);
                     var pTag = window.parent.document.getElementById("myFooter");
-                    pTag.style.color = fontColor.
+                    pTag.style.color = fontColor;
                 });
             });
 

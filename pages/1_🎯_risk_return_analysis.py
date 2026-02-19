@@ -1,27 +1,13 @@
 from utils.style import footer, metric_box
 from utils.risk_simulation import TradingSimulator
+from config.slider_configs import SLIDER_CONFIGS
 import streamlit as st
 import plotly.express as plotly_express
 import plotly.graph_objects as go
 import numpy as np
-import sys
-import os
-# Add the root directory to the PYTHONPATH before importing modules
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-SLIDER_CONFIGS = {
-    "trades_per_year": {"min_value": 5, "max_value": 100, "value": 30, "step": 5},
-    "win_rate": {"min_value": 28.0, "max_value": 70.0, "value": 40.0, "step": 2.0},
-    "risk_per_trade": {"min_value": 0.25, "max_value": 5.0, "value": 1.0, "step": 0.25},
-    "return_per_unit_risk": {"min_value": 0.5, "max_value": 8.0, "value": 3.0, "step": 0.5},
-    "num_simulations": {"min_value": 10_000, "max_value": 100_000, "value": 10_000, "step": 10_000},
-}
-
-# Remove the page configuration settings (handled in main script)
-# st.set_page_config(layout="wide")
-
-# App theme settings can remain if needed
+# App theme settings
 st.markdown("""
     <style>
     body {
@@ -199,7 +185,7 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
         avg_return_for_annotation = np.interp(win_rate_value, win_rates, avg_returns)
         annotation_y = avg_return_for_annotation + y_range * 0.05 if y_range != 0 else avg_return_for_annotation + 5
         fig.add_annotation(
-            x=f"{win_rate_value}",
+            x=f"{win_rate_value}%",
             y=annotation_y,
             text="Expected Return",
             showarrow=True,
@@ -220,6 +206,7 @@ def create_win_rate_vs_return_chart(simulator, return_per_unit_risk, num_simulat
     return fig
 
 
+@st.cache_data(show_spinner=False)
 def simulate_trades(win_rate, num_trades_per_year, risk_per_trade, simulations=1000):
     """
     Simulate trades to calculate the average maximum drawdown over multiple simulations.
@@ -273,7 +260,6 @@ def app():
     st.markdown("""
         <div style="text-align: center; padding: 22px;">
             <h4 style="color: #5D6D7E;">Stay Alive Long Enough to Get Lucky</h4>
-            <!---<p style="font-style: italic; color: #5D6D7E;">Jason Shapiro</p>
         </div>
     """, unsafe_allow_html=True)
 
